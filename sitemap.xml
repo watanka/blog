@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://watanka.github.io/blog/about.html</loc>
-    <lastmod>2023-11-27T02:27:14.079Z</lastmod>
+    <lastmod>2023-11-27T03:00:55.284Z</lastmod>
   </url>
   <url>
     <loc>https://watanka.github.io/blog/posts/welcome/index.html</loc>
-    <lastmod>2023-11-27T02:27:13.273Z</lastmod>
-  </url>
-  <url>
-    <loc>https://watanka.github.io/blog/posts/sample-post/index.html</loc>
-    <lastmod>2023-11-27T02:27:12.611Z</lastmod>
+    <lastmod>2023-11-27T03:00:54.478Z</lastmod>
   </url>
   <url>
     <loc>https://watanka.github.io/blog/posts/post-with-code/index.html</loc>
-    <lastmod>2023-11-27T02:27:12.951Z</lastmod>
+    <lastmod>2023-11-27T03:00:53.671Z</lastmod>
+  </url>
+  <url>
+    <loc>https://watanka.github.io/blog/posts/sample-post/index.html</loc>
+    <lastmod>2023-11-27T03:00:53.356Z</lastmod>
+  </url>
+  <url>
+    <loc>https://watanka.github.io/blog/posts/ocr/index.html</loc>
+    <lastmod>2023-11-27T03:00:54.183Z</lastmod>
   </url>
   <url>
     <loc>https://watanka.github.io/blog/index.html</loc>
-    <lastmod>2023-11-27T02:27:13.768Z</lastmod>
+    <lastmod>2023-11-27T03:00:54.970Z</lastmod>
   </url>
 </urlset>
