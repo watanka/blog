@@ -3,18 +3,17 @@ project:
   output-dir: docs
 
 website:
-  title: "실버도시"
+  title: "실버의 지식과 경험이 담긴 공간"
   navbar:
     right:
       - about.qmd
       - icon: github
         href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+
 format:
   html:
-    theme: cosmo
-    css: styles.css
-
+    theme: 
+      light: flatly
+      dark: darkly
 
 

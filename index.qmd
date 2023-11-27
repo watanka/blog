@@ -1,5 +1,5 @@
 ---
-title: "실버도시"
+title: "실버의 지식과 경험이 담긴 공간"
 listing:
   contents: posts
   sort: "date desc"
