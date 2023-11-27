@@ -2,15 +2,7 @@
 
 OCR(Optical Character Recognition)은 이미지 속의 글자를 읽는 기술이다. 조금 생소할 수도 있는 이름인 OCR은 생각보다 [우리의 일상 속 깊숙이 자리하고 있다](https://medium.com/naver-cloud-platform/%EC%9D%B4%EB%A0%87%EA%B2%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EC%84%B8%EC%9A%94-ocr%EC%9D%84-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%99%9C%EC%9A%A9%ED%95%A0%EA%B9%8C%EC%9A%94-ada22fb3c3ca#:~:text=%EB%AC%B8%EC%84%9C%EB%A5%BC%20%EC%9D%B8%EC%8B%9D%ED%95%98%EA%B3%A0%20%EC%82%AC%EC%9A%A9%EC%9E%90,%EB%8B%A4%EC%96%91%ED%95%98%EA%B2%8C%20%ED%99%9C%EC%9A%A9%EB%90%98%EA%B3%A0%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.&text=%EB%84%A4%EC%9D%B4%EB%B2%84%20%ED%81%B4%EB%A1%9C%EB%B0%94%EC%9D%98%20OCR%20%EA%B8%B0%EC%88%A0,%ED%95%98%EC%97%AC%20%EC%A0%95%ED%99%95%EB%8F%84%EB%A5%BC%20%EB%86%92%EC%9D%B4%EA%B3%A0%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.). OCR은 신용카드, 사업자등록증이나 주민등록증, 또는 영수증 등 필요한 서류 정보를 촬영만 하면 전자 정보로 변환 가능하게 해준다. 또, 차량번호판 정보를 추출해서 불법 주차나 속도 위반 차량을 파악하기도 한다. 그리고 아직 [종이 문서에서 전자 문서로의 전환](https://www.joongang.co.kr/article/23961049#home)이 진행중인 기업들이 한 장씩 문서 내용을 직접 체크해야하는 부담을 줄여 업무 자동화를 가속화해준다. 유입되는 데이터의 크기가 커지고 있는 빅데이터 시대에 사는 우리에게 '사람의 눈을 일일히 거치지 않고 이미지에서 필요한 텍스트 정보만을 추출할 수 있게 되었다'라는 것은 **빅데이터를 우리의 편의에 맞게 더 잘 활용할 수 있는 옵션이 생겼음을 의미**한다.
 
-<p align="center">  
-    <img src="cardocr.png" style = "float" align="left" width="20%" height="100%">  
-    <img src="plate-ocr.png" style = "float" align="center" width="30%" height="100%">  
-    <img src="doc-ocr.png" style = "float" align="right" width="35%" height="100%">  <figcaption align="center">OCR이 일상에서 활용되는 예시</figcaption></p>
-
-</br>
-</br>
-</br>
-</br>
+![OCR이 실생활에 사용되는 예](ocr-samples.png)
 
 2019년, AI 자동차수리비 산출시스템 프로젝트를 진행중이였을 때였다. 파손된 차량의 사진을 휴대폰 촬영해서 앱에 업로드하면 수리 금액이 얼마가 나올지 예측하는 이미지 딥러닝 모델을 개발 중이였다. 여느때처럼 퇴근하고 집에 돌아가는 길, 같은 지하철을 타는 팀장님에게 이런 질문을 했었다. 
 
