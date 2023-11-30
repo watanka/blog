@@ -67,7 +67,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -136,7 +136,28 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a></li>
+  <li><a href="#ocr.-컴퓨터가-사람-대신-글을-읽어주는-일." id="toc-ocr.-컴퓨터가-사람-대신-글을-읽어주는-일." class="nav-link" data-scroll-target="#ocr.-컴퓨터가-사람-대신-글을-읽어주는-일.">OCR. 컴퓨터가 사람 대신 글을 읽어주는 일.</a>
+  <ul class="collapse">
+  <li><a href="#문자-영역-탐지-scene-text-detectionstd" id="toc-문자-영역-탐지-scene-text-detectionstd" class="nav-link" data-scroll-target="#문자-영역-탐지-scene-text-detectionstd">1. <strong>문자 영역 탐지 (Scene Text Detection;STD)</strong></a></li>
+  <li><a href="#문자-인식-scene-text-recognitionstr" id="toc-문자-인식-scene-text-recognitionstr" class="nav-link" data-scroll-target="#문자-인식-scene-text-recognitionstr">2. <strong>문자 인식 (Scene Text Recognition;STR)</strong></a></li>
+  <li><a href="#문서-이해-document-understanding" id="toc-문서-이해-document-understanding" class="nav-link" data-scroll-target="#문서-이해-document-understanding">3. <strong>문서 이해 (Document Understanding)</strong></a></li>
+  </ul></li>
+  <li><a href="#ocr을-하면서-생길-수-있는-문제들" id="toc-ocr을-하면서-생길-수-있는-문제들" class="nav-link" data-scroll-target="#ocr을-하면서-생길-수-있는-문제들">OCR을 하면서 생길 수 있는 문제들</a>
+  <ul class="collapse">
+  <li><a href="#문자-영역-탐지std-단계" id="toc-문자-영역-탐지std-단계" class="nav-link" data-scroll-target="#문자-영역-탐지std-단계">1. 문자 영역 탐지(STD) 단계</a></li>
+  <li><a href="#문자-인식str-단계" id="toc-문자-인식str-단계" class="nav-link" data-scroll-target="#문자-인식str-단계">2. 문자 인식(STR) 단계</a></li>
+  <li><a href="#문서-이해-단계-rule-based일-경우" id="toc-문서-이해-단계-rule-based일-경우" class="nav-link" data-scroll-target="#문서-이해-단계-rule-based일-경우">3. 문서 이해 단계 (Rule-Based일 경우)</a></li>
+  </ul></li>
+  <li><a href="#outro" id="toc-outro" class="nav-link" data-scroll-target="#outro">Outro</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -156,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 <p>‘저희 프로젝트처럼 사물 자체가 아닌 사물의 손상 심도까지 파악할 정도로 이미지 모델의 성능이 좋다면, 글자들을 인식하는 것도 상품화가 가능하지 않을까요?’</p>
 <p>그 때 팀장님의 답변은 아직도 기억에 남는다.</p>
 <p>“이미지 모델의 형태가 점점 발전하고 있기는 하지만, 결국 이미지 안의 물체의 영역을 탐지하고, 해당 물체가 미리 정의해놓은 클래스의 범주 내에서 분류되는 이미지 모델의 틀은 쉽게 변하기 힘들어요. 한글로 나올 수 있는 한 글자짜리 조합만 생각해도 대략 6, 7천개(<a href="https://m.blog.naver.com/khsamuel/221442007316">링크</a>)쯤은 될 거고, ****거기다 종이 한장에 보통 글자가 못해도 300개 400개 쯤은 될 거예요. 그럼 그 문서 한 장에 나오는 글자들을 모두 올바르게 맞출 확률은 얼마나 될까요? 그리고 이 글자 읽는 태스크를 컴퓨터로 대체하려면 적어도 100장 이상, 아니 10,000장 정도는 거뜬히 처리할 줄 알아야 현장에 사용이 가능할 텐데, 그렇게 된다면 정확도는 얼마 정도가 보장될까요? 그런데 또 모르죠. 나중에는 그 정확도를 확 올릴 수 있는 기술들이 나올수도…”</p>
-<p>자고 일어나면 최신 기술들이 뒤바뀔만큼 미친 속도로 새로운 기술들이 쏟아져 나왔고, 왜 문서를 AI 이미지 모델로 처리해서 정확도를 뽑는 게 힘든지 설명을 해주셨던 팀장님과 우리 팀은 2년째 OCR 제품을 개발중이다.</p>
+<p>자고 일어나면 최신 기술들이 뒤바뀔만큼 미친 속도로 새로운 기술들이 쏟아져 나왔고, 왜 문서를 AI 이미지 모델로 처리해서 정확도를 뽑는 게 힘든지 설명을 해주셨던 팀장님과 우리 팀은 2년째 OCR 제품을 개발중이다. <br><br></p>
 </section>
 <section id="ocr.-컴퓨터가-사람-대신-글을-읽어주는-일." class="level2">
 <h2 class="anchored" data-anchor-id="ocr.-컴퓨터가-사람-대신-글을-읽어주는-일.">OCR. 컴퓨터가 사람 대신 글을 읽어주는 일.</h2>
@@ -168,45 +189,31 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>OCR. 이미지를 보고 컴퓨터가 인식할 수 있는 문자로 변환하는 일.</p>
 <p>OCR은 어떻게 이뤄질까?</p>
-<p>회사마다 어떤 모델을 쓰고, 어떤 단계에 기준을 두고 모델을 설계하는지는 조금씩 다르겠지만, 보통 OCR은 2단계 또는 3단계로 이루어진다. 2단계는 이미지 중 텍스트 영역을 탐지하는 1)문자 영역 탐지(STD)단계와, 탐지한 영역의 텍스트를 인식하는 2)문자 인식(STR)단계, 그리고 문서 이미지의 경우 인식한 텍스트 정보를 분류하고 구조화하는 3)문서 이해(Document Understanding) 단계까지 3단계로 구성된다.</p>
+<p>회사마다 어떤 모델을 쓰고, 어떤 단계에 기준을 두고 모델을 설계하는지는 조금씩 다르겠지만, 보통 OCR은 2단계 또는 3단계로 이루어진다. 2단계는 이미지 중 텍스트 영역을 탐지하는 1)문자 영역 탐지(STD)단계와, 탐지한 영역의 텍스트를 인식하는 2)문자 인식(STR)단계, 그리고 문서 이미지의 경우 인식한 텍스트 정보를 분류하고 구조화하는 3)문서 이해(Document Understanding) 단계까지 3단계로 구성된다. <br><br></p>
 <section id="문자-영역-탐지-scene-text-detectionstd" class="level3">
 <h3 class="anchored" data-anchor-id="문자-영역-탐지-scene-text-detectionstd">1. <strong>문자 영역 탐지 (Scene Text Detection;STD)</strong></h3>
 <p>이미지에는 한 개 이상의 문자 영역이 존재할 수 있다. 정확한 문자 인식을 위해 문자가 속하는 영역을 탐지한다. 잘못 잘린 문자 영역은 문자 인식의 성능을 떨어트리지만, 반대로 알맞게 잘린 문자 영역은 문서 이해(Document Understanding) 단계의 알맞은 단위로 작용한다.</p>
 <p>Scene Text Detection 관련 최신 모델들의 정보는 <strong><a href="https://paperswithcode.com/task/scene-text-detection">여기</a></strong>에서 찾을 수 있다.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="std-process.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Untitled</figcaption>
-</figure>
-</div>
+<p><img src="std-process.png" class="img-fluid"></p>
+<p><br><br></p>
 </section>
 <section id="문자-인식-scene-text-recognitionstr" class="level3">
 <h3 class="anchored" data-anchor-id="문자-인식-scene-text-recognitionstr">2. <strong>문자 인식 (Scene Text Recognition;STR)</strong></h3>
 <p>STD(문자 영역 탐지)단계에서 잘라낸 문자 이미지로부터 컴퓨터 문자로 인식하는 단계이다. 보통 글자 하나 하나를 개별로 인식하는 것이 아니라, 1개 이상의 글자로 이루어진 단어 단위로 인식한다. 글자가 1개 이상이다 보니, 글자와 글자 간의 순차적 종속성(sequential dependency)이 존재한다. 예를 들어, 앞에 두 글자가 ’아이스크’였다면 그 다음에 오는 글자는 ’림’일 확률이 높다. 이런 순차적인(sequential) 특성을 활용하기 위해서, Bi-LSTM, Attention, 그리고 최근에는 Transformer 모델을 활용한다. (<a href="https://www.notion.so/e181266b3b624c959e832c86343d435e?pvs=21">이 글</a>에서 Sequential Data를 처리하기 위한 모델들에 대해서 읽을 수 있다.)</p>
 <p>STR 관련 최신 모델들의 정보는 <a href="https://paperswithcode.com/task/scene-text-recognition"><strong>여기</strong></a>에서 찾을 수 있다.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="str-process.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Untitled</figcaption>
-</figure>
-</div>
+<p><img src="str-process.png" class="img-fluid"></p>
 </section>
 <section id="문서-이해-document-understanding" class="level3">
 <h3 class="anchored" data-anchor-id="문서-이해-document-understanding">3. <strong>문서 이해 (Document Understanding)</strong></h3>
 <p>STD와 STR 단계를 무사히 거쳐 원하는 컴퓨터 문자를 추출해냈다고 하자. 다음엔 뭐가 필요할까? 추출해낸 문자들을 컴퓨터가 이해할 수 있는 방식으로 정리하는 작업이 필요하다.</p>
 <p>아래 표 이미지를 중앙에 위치한 글자들로 추출해냈다고 하자. 사람은 맨 윗쪽 행이 각 열들을 나타내는 열이름(column name)이라는 것, 그리고 맨 왼쪽의 열은 행이름(row name), 그리고 옆의 행들은 각 행들의 정보를 나타낸다는 사실을 쉽게 알아차릴 수 있다. (Matt의 수학 점수는 60점, 물리학 점수는 65점) 하지만, 컴퓨터는 그렇지 않다. 중앙 글자들(정보)로부터 구조화하는 과정이 필요하다. 올바른 문서 이해 과정을 거친다면, 아래 그림의 세번째 표를 뽑아낼 수 있을 것이다. 참고로, 테이블화한다는 것은 [{‘Name’ : ‘Matt’, ‘Math’ : 80, ‘Physics’ : 65, ‘History’ : 80, ‘English’ : 74}, …]와 같이 json, xml 등과 같은 포맷으로 구조화할 수 있음을 의미한다. 여기서 중요한 점은 글자에 대한 정보 뿐만 아니라, 글자의 위치, 그리고 그 글자 주변의 표 성분, 즉 사람이 문맥에 맞춰 글자를 읽기 위해 시각적으로 사용하는 정보들이 문서 이해 과정에서 고려되어야 한다는 것이다.</p>
 <p>문서 이해 관련 최신 모델들의 논문 정보는 <strong><a href="https://paperswithcode.com/search?q_meta=&amp;q_type=&amp;q=document+understanding">여기</a></strong>에서 찾을 수 있다.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="understanding-process.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Untitled</figcaption>
-</figure>
-</div>
+<p><img src="understanding-process.png" class="img-fluid"></p>
 </section>
 </section>
 <section id="ocr을-하면서-생길-수-있는-문제들" class="level2">
 <h2 class="anchored" data-anchor-id="ocr을-하면서-생길-수-있는-문제들">OCR을 하면서 생길 수 있는 문제들</h2>
-<p>물론 위 3단계를 문제없이 진행하면 이상적이겠지만, AI 모델에 99.9999%의 정확도는 있더라도 100% 정확도는 없다. 각 단계별 인식 측면에서 다양한 문제들이 발생한다.</p>
+<p>물론 위 3단계를 문제없이 진행하면 이상적이겠지만, AI 모델에 99.9999%의 정확도는 있더라도 100% 정확도는 없다. 각 단계별 인식 측면에서 다양한 문제들이 발생한다. <br><br></p>
 <section id="문자-영역-탐지std-단계" class="level3">
 <h3 class="anchored" data-anchor-id="문자-영역-탐지std-단계">1. 문자 영역 탐지(STD) 단계</h3>
 <p><strong>목적 : 인식 대상 텍스트를 이미지로부터 캡쳐</strong></p>
@@ -222,8 +229,7 @@ ul.task-list li input[type="checkbox"] {
 <li>원래 하나의 박스를 두 개 이상의 박스로 잡는 경우</li>
 <li>반대로 두 개 이상의 박스를 하나로 잡는 경우</li>
 </ol>
-<img src="misdetection-example.png" class="img-fluid" alt="$10,000를 [‘$10’, ‘000’]으로 탐지했다. 상금 만 달러가 10달러로 줄어든다면 아무도 좋아하지 않을 거다.">
-$10,000를 [‘$10’, ‘000’]으로 탐지했다. 상금 만 달러가 10달러로 줄어든다면 아무도 좋아하지 않을 거다.</li>
+<img src="misdetection-example.png" class="img-fluid" alt="$10,000를 [‘$10’, ‘000’]으로 탐지했다. 상금 만 달러가 10달러로 줄어든다면 아무도 좋아하지 않을 거다."></li>
 </ol>
 </section>
 <section id="문자-인식str-단계" class="level3">
@@ -239,13 +245,7 @@ $10,000를 [‘$10’, ‘000’]으로 탐지했다. 상금 만 달러가 10달
 <figcaption class="figure-caption">직사각형의 글자 이미지가 아니라 폴리곤(polygon) 형태의 이미지가 들어온다면?</figcaption>
 </figure>
 </div>
-<p>직사각형의 글자 이미지가 아니라 폴리곤(polygon) 형태의 이미지가 들어온다면?</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="vertical-alignment-example.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Untitled</figcaption>
-</figure>
-</div></li>
+<p><img src="vertical-alignment-example.png" class="img-fluid"></p></li>
 </ul></li>
 <li>학습 데이터에 기반한 인식 오류
 <ul>
@@ -256,8 +256,7 @@ $10,000를 [‘$10’, ‘000’]으로 탐지했다. 상금 만 달러가 10달
 <p><img src="handwritten.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">손글씨 폰트체다. 과연 고딕체의 직각 글자 이미지를 학습한 모델이 손글씨를 인식할 수 있을까?</figcaption>
 </figure>
-</div>
-<p>손글씨 폰트체다. 과연 고딕체의 직각 글자 이미지를 학습한 모델이 손글씨를 인식할 수 있을까?</p></li>
+</div></li>
 </ul></li>
 </ol>
 </section>
@@ -271,6 +270,7 @@ $10,000를 [‘$10’, ‘000’]으로 탐지했다. 상금 만 달러가 10달
 </ol></li>
 <li>앞에 STD와 STR에서 오류가 발생한 경우</li>
 </ol>
+<p><br><br></p>
 </section>
 </section>
 <section id="outro" class="level2">
