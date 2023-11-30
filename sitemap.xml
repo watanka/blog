@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://watanka.github.io/blog/about.html</loc>
-    <lastmod>2023-11-28T00:33:22.210Z</lastmod>
-  </url>
-  <url>
-    <loc>https://watanka.github.io/blog/posts/welcome/index.html</loc>
-    <lastmod>2023-11-28T00:33:21.428Z</lastmod>
-  </url>
-  <url>
-    <loc>https://watanka.github.io/blog/posts/post-with-code/index.html</loc>
-    <lastmod>2023-11-28T00:33:20.642Z</lastmod>
-  </url>
-  <url>
-    <loc>https://watanka.github.io/blog/posts/sample-post/index.html</loc>
-    <lastmod>2023-11-28T00:33:20.338Z</lastmod>
+    <loc>https://watanka.github.io/blog/posts/실험을잘한다는것/index.html</loc>
+    <lastmod>2023-11-30T13:27:37.097Z</lastmod>
   </url>
   <url>
     <loc>https://watanka.github.io/blog/posts/ocr/index.html</loc>
-    <lastmod>2023-11-28T00:33:21.147Z</lastmod>
+    <lastmod>2023-11-30T13:27:36.024Z</lastmod>
+  </url>
+  <url>
+    <loc>https://watanka.github.io/blog/posts/deview2023-ml_ai개발자를위한단계별python최적화/index.html</loc>
+    <lastmod>2023-11-30T13:27:34.911Z</lastmod>
+  </url>
+  <url>
+    <loc>https://watanka.github.io/blog/about.html</loc>
+    <lastmod>2023-11-30T13:27:33.729Z</lastmod>
   </url>
   <url>
     <loc>https://watanka.github.io/blog/index.html</loc>
-    <lastmod>2023-11-28T00:33:21.919Z</lastmod>
+    <lastmod>2023-11-30T13:27:34.370Z</lastmod>
+  </url>
+  <url>
+    <loc>https://watanka.github.io/blog/posts/kakao-ocr/index.html</loc>
+    <lastmod>2023-11-30T13:27:35.504Z</lastmod>
+  </url>
+  <url>
+    <loc>https://watanka.github.io/blog/posts/software2.0/index.html</loc>
+    <lastmod>2023-11-30T13:27:36.585Z</lastmod>
   </url>
 </urlset>
