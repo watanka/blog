@@ -2,10 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/deview2023-ml_ai개발자를위한단계별python최적화/index.html",
-      "/posts/실험을잘한다는것/index.html",
-      "/posts/software2.0/index.html",
-      "/posts/kakao-ocr/index.html",
+      "/posts/sample-post/index.html",
+      "/posts/post-with-code/index.html",
+      "/posts/welcome/index.html",
       "/posts/ocr/index.html"
     ]
   }
