@@ -16,5 +16,20 @@
   },
   "posts/ocr/index.qmd": {
     "index.html": "36e13758"
+  },
+  "posts/kakao-ocr/index.qmd": {
+    "index.html": "503bf739"
+  },
+  "posts/software2.0/index.qmd": {
+    "index.html": "f919202a"
+  },
+  "posts/실험을잘한다는것/index.qmd": {
+    "index.html": "fc63158e"
+  },
+  "posts/deview2023-ml_ai개발자를위한단계별python최적화/index.qmd": {
+    "index.html": "465d60f3"
+  },
+  "post_in_progress/fastapi-dashboard-project/index.qmd": {
+    "index.html": "ebd35e37"
   }
 }
