@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Eunsung Shin">
+<meta name="dcterms.date" content="2023-01-15">
 
-<title>실버의 지식과 경험이 담긴 공간 – index</title>
+<title>실버의 지식과 경험이 담긴 공간 - LLMSummarizer 프로젝트(3)오디오 데이터 형식을 바꿔서 속도 개선하기</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -100,7 +136,38 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">LLMSummarizer 프로젝트(3)오디오 데이터 형식을 바꿔서 속도 개선하기</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Project</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Eunsung Shin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 15, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -109,10 +176,88 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>AI 기술을 적용하기 위한 프로세스</p>
-<p>데이터 수집, 라벨링 -&gt; 모델링 -&gt; 배포</p>
-<p>연구용 코드를 대용량 트래픽을 감당하기에 적합한 코드로 수정 모델 버젼 관리 및 배포 자동화</p>
-<p>SaaS의 한계점 - 데이터 보안 - 제한적인 커스터마이즈 - Data Flywheel 형성의 부재 : 데이터가 증가함에 따라, 모델의 성능이 좋아지고, 서비스 품질이 향상됨에 따라 유저들이 증가한다. 데이터를 통한 선순환 고리 <img src="data_flywheel.png" class="img-fluid"></p>
+
+<p>환경을 셋팅했으니, 이제 개선포인트를 찾아서 하나씩 개선해나갈 차례이다.</p>
+<p>가장 먼저 택한 개선포인트는 pytube에서 오디오파일을 직접 다운로드하는 부분이 있는데, 이 다운로드 과정을 생략하고 바로 whisper 모델에 넘겨주도록 바꾸는 것이다.</p>
+<p>유튜브 url이 들어오면, mp3파일로 변환해주어야 다음 단계인 whisper모델에 넘길 수 있다. url을 mp3로 변환하는 단계는 <code>pytube</code> 라는 라이브러리를 사용했다.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> audio_stream(<span class="va">self</span>):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">    **download audio file as side effect</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        tmp_fname <span class="op">=</span> <span class="bu">str</span>(uuid4())[:<span class="dv">8</span>] <span class="op">+</span> <span class="st">".mp3"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.parse_obj.streams.<span class="bu">filter</span>(only_audio<span class="op">=</span><span class="va">True</span>).first().download(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            output_path<span class="op">=</span>tmpdir, filename<span class="op">=</span>tmp_fname</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        audio_file_reader <span class="op">=</span> <span class="bu">open</span>(os.path.join(tmpdir, tmp_fname), <span class="st">"rb"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> audio_file_reader</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">finally</span>:</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        os.remove(os.path.join(tmpdir, tmp_fname))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>pytube</code>에서 변환한 음성 데이터를 파일로 다운로드하고 다시 open() 함수로 읽는 형식으로 구성되어있다. 그리고 다운로드한 파일은 데이터를 넘겨준 후, 삭제되도록 설정했다.</p>
+<p>뭔가 아쉽다는 생각이 들었다. 다운로드하지 않고, 바로 whisper api에 넘길 수 있다면 더 효율적이지 않을까?</p>
+<p>우선 pytube가 음성 데이터를 리턴할 수 있는 데이터 형식과 whisper api가 인풋으로 받을 수 있는 형식들을 살펴봤다.</p>
+<p>우선 whisper api의 리포를 확인하니, whisper는 _IoBufferReader를 인풋으로 받는다. (<code>open(file, ‘rb’)</code> 가 리턴하는 클래스다)</p>
+<p>pytube는 <code>YouTube</code> 클래스로 url을 넘겨받아 파싱한 후, 필요한 처리를 하는 식으로 구성되어있다.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> pytube.YouTube(URL)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>parser.streams <span class="co"># parser.streams = List[Stream]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>이 streams에는 해당 비디오들에 대한 정보가 담긴 <code>Stream</code> 이 리스트로 들어있다. 혹시 download 함수 말고, 바로 데이터를 취할 수 있는 함수가 있는지 확인해봤지만, API 문서에도 소스코드에도 딱히 없었다. 그래서 <code>download()</code> 함수를 까서 보았다.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        output_path: Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        filename: Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        filename_prefix: Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        skip_existing: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        timeout: Optional[<span class="bu">int</span>] <span class="op">=</span> <span class="va">None</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        max_retries: Optional[<span class="bu">int</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 파일 이름 작명</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                ...</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                <span class="co"># 이미 파일이 있는지 확인</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                ...</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                <span class="co"># 다운로드가 남은 파일사이즈 체크</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        bytes_remaining <span class="op">=</span> <span class="va">self</span>.filesize</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        logger.debug(<span class="ss">f'downloading (</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>filesize<span class="sc">}</span><span class="ss"> total bytes) file to </span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">"wb"</span>) <span class="im">as</span> fh:</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> chunk <span class="kw">in</span> request.stream(</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.url,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                    timeout<span class="op">=</span>timeout,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                    max_retries<span class="op">=</span>max_retries</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                ):</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># reduce the (bytes) remainder by the length of the chunk.</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                    bytes_remaining <span class="op">-=</span> <span class="bu">len</span>(chunk)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># send to the on_progress callback.</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.on_progress(chunk, fh, bytes_remaining)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> HTTPError <span class="im">as</span> e:</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> e.code <span class="op">!=</span> <span class="dv">404</span>:</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Some adaptive streams need to be requested with sequence numbers</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> chunk <span class="kw">in</span> request.seq_stream(</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.url,</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>                    timeout<span class="op">=</span>timeout,</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>                    max_retries<span class="op">=</span>max_retries</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>                ):</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># reduce the (bytes) remainder by the length of the chunk.</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                    bytes_remaining <span class="op">-=</span> <span class="bu">len</span>(chunk)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># send to the on_progress callback.</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.on_progress(chunk, fh, bytes_remaining)</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.on_complete(file_path)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> file_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>살펴보니, <code>pytube.request.stream()</code> 함수로 url에서 데이터를 전송받으면, <code>Stream.on_progress</code> 와 <code>Stream.on_complete</code> 가 파일에다가 기록하는 방식이였다. 우선 url에서 데이터를 전송받는 기능만 빼내면 될 듯하다. 에러 처리는 그 후에 붙이면 된다. 이제 그럼 <code>pytube.request.stream()</code> 함수를 살펴보자.</p>
+<p>다음으로 whisper api를 살펴봤다. 현재 whisper api에는 <code>_io.BufferedReader</code> 를 인풋값으로 받는다. 뭔가 바로</p>
+<p>이제 line_profiler를 사용해서 만든</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Untitled</figcaption>
+</figure>
+</div>
+<p>download 버젼은 총 0.0376247초, 그리고 bytes들을 직접 넘기는 버젼은 0.0230186초 걸렸다.</p>
+<p>Whisper나 LLM을 호출하는데 걸리는 오버헤드에 비하면 미미한 차이긴 하지만, 수정한 버젼이 약 30%정도 속도가 빠른 걸 확인할 수 있다.</p>
 
 
 
