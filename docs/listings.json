@@ -3,9 +3,12 @@
     "listing": "/index.html",
     "items": [
       "/posts/deview2023-ml_ai개발자를위한단계별python최적화/index.html",
+      "/posts/LLMSummarizer프로젝트2/index.html",
+      "/posts/LLMSummarizer프로젝트1/index.html",
       "/posts/실험을잘한다는것/index.html",
       "/posts/software2.0/index.html",
       "/posts/kakao-ocr/index.html",
+      "/posts/PAN++/index.html",
       "/posts/ocr/index.html"
     ]
   }
