@@ -151,14 +151,14 @@ ul.task-list li input[type="checkbox"] {
 <p>이번 글은 2021년 8월에 나온 <a href="https://arxiv.org/pdf/2105.00405.pdf">PAN++: Towards Efficient and Accurate End-to-End Spotting of Arbitrarily-Shaped Text</a>의 리뷰이다. <strong>텍스트 탐지(STD)와 텍스트 인식(STR)이 한 번에 이루어지는 End2End Text Spotting</strong> 모델이고, 기존의 End2End 모델들이나 STD(only) 모델들과 비교했을 때, 더 빠른 속도와 정확도를 갖는다고 한다. End2End Spotting 모델이긴 하지만, 이 글에서는 텍스트 탐지 과정이 어떻게 이루어지는지에 대해서만 중점적으로 다룰 예정이다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_12.19.51.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_12.19.51.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">PAN++와 기존 STD 모델 간의 Precision, Recall, F1 Measure 비교</figcaption>
 </figure>
 </div>
 <p>PAN++와 기존 STD 모델 간의 Precision, Recall, F1 Measure 비교</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_12.22.09.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_12.22.09.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">PAN++와 기존 End2End text spotting 모델 간의 F-measure와 Inference Speed 비교</figcaption>
 </figure>
 </div>
@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 <p>** Regression-based와 Segmentation-based가 궁금하다면 이 <a href="https://www.notion.so/STD-Regression-vs-Segmentation-9d9ae48d53b94942b7cf640e48b20ae3?pvs=21">링크</a> 참조</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="docs\posts\PAN++\스크린샷_2021-12-27_오후_1.36.01.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_1.36.01.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">(a) 원본 이미지 (b) regression based 탐지 결과 (c) segmentation based 탐지 결과 (d) PAN++(segmentation based) 탐지 결과</figcaption>
 </figure>
 </div>
@@ -185,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
 <p>PAN++ 모델의 모델 구조는 크게 backbone, neck, head 세 단계로 이루어져있다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_3.21.04.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_3.21.04.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">PAN++ 모델 구조</figcaption>
 </figure>
 </div>
@@ -197,7 +197,7 @@ ul.task-list li input[type="checkbox"] {
 <p>이렇게 <strong>4가지의 해상도로 나누어서 featuremap을 추출하는 이유는 다양한 feature-level의 표현력(representation)을 학습에 잘 반영하기 위함</strong>이다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_2.24.05.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_2.24.05.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">백본 인풋 (a)과 아웃풋 (b). 결괏값은 왼쪽부터 오른쪽으로 인풋이미지의 1/4, 1/8, 1/16, 1/32 해상도를 갖는다.</figcaption>
 </figure>
 </div>
@@ -209,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 <p>** FPEM에 대해서 좀 더 궁금하다면 이 <a href="https://www.notion.so/FPEM-Feature-Pyramid-Enhancement-Module-ba91b72ae2184555a456ff26f3172a72?pvs=21">링크</a>를 참조</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_2.47.44.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_2.47.44.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">스크린샷 2021-12-26 오후 2.47.44.png</figcaption>
 </figure>
 </div>
@@ -218,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="head">3. head</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_3.24.06.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_3.24.06.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">스크린샷 2021-12-26 오후 3.24.06.png</figcaption>
 </figure>
 </div>
@@ -230,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 <p>텍스트 이미지를 라벨링(또는 어노테이션)하는 방법은 여느 이미지 라벨링과 비슷하다. 텍스트 인스턴스의 단위를 어떻게 설정할지나 라벨링에 [UNK]와 같은 특수한 태그를 추가해서 데이터 처리에 활용하는 등 세부적인 사항에서 그 편차가 있을 수 있겠지만, 텍스트 영역에 4점 이상의 박스를 그리고, 텍스트 내용으로 라벨링하는 것이 일반적이다. 원하는 결과를 도출하기 위해서 이 보편적인 라벨링을 PAN++에서는 어떤 식으로 활용하는지 주목하자. (라벨링 형태 자체를 변환하기 위해서는 많은 비용이 들기 때문에, 딥러닝 모델들은 기존의 라벨링을 잘 활용해서 독창적인 기법을 만들어내곤 한다.)</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_9.02.56.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_9.02.56.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">보편적인 텍스트 라벨링</figcaption>
 </figure>
 </div>
@@ -242,42 +242,42 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_8.42.38.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_8.42.38.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">텍스트 라벨링에서 text kernel을 도출하는 방법</figcaption>
 </figure>
 </div>
 <p>텍스트 라벨링에서 text kernel을 도출하는 방법</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오전_9.53.05.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오전_9.53.05.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">스크린샷 2021-12-27 오전 9.53.05.png</figcaption>
 </figure>
 </div>
 <p>아래는 PAN++의 아웃풋 예시이다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오후_1.35.00.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_1.35.00.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">원본 이미지</figcaption>
 </figure>
 </div>
 <p>원본 이미지</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오후_1.35.32.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_1.35.32.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Text Region</figcaption>
 </figure>
 </div>
 <p>Text Region</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오후_1.35.44.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_1.35.44.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Text Kernel(Text Region보다 중심으로 응축된 영역)</figcaption>
 </figure>
 </div>
 <p>Text Kernel(Text Region보다 중심으로 응축된 영역)</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오후_1.36.01.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_1.36.01.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Text Instance (고유한 텍스트 박스 마스킹)</figcaption>
 </figure>
 </div>
@@ -288,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
 <p>이제 우리에게 Text Region, Text kernel, 그리고 Text Instance에 대한 정보가 생겼다. 이 정보를 <strong>Train 단계에서</strong> 어떻게 활용해야 <strong>가까운 두 개의 텍스트가 겹치지 않고 서로 다른 텍스트 인스턴스로 구분되면서 텍스트 영역을 충분히 커버</strong>할 수 있을까?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_10.00.19.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_10.00.19.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">text kernel i(ki; 파랑)는 text region만큼 확장하지만, 다른 커널(주황색)과 겹치지 않아야한다.</figcaption>
 </figure>
 </div>
@@ -296,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
 <p>탐지 손실함수는 text loss, kernel loss, 그리고 emb loss 총 세 종류의 <strong>loss의 합</strong>으로 이루어진다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-26_오후_10.57.10.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-26_오후_10.57.10.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">스크린샷 2021-12-26 오후 10.57.10.png</figcaption>
 </figure>
 </div>
@@ -307,7 +307,7 @@ ul.task-list li input[type="checkbox"] {
 <p>aggregation loss</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오후_2.31.58.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_2.31.58.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">F(p) = instance vector, g(K) = instance vector of text kernel. D1은 instance vector와 instance kernel 간의 거리를 나타낸다</figcaption>
 </figure>
 </div>
@@ -315,7 +315,7 @@ ul.task-list li input[type="checkbox"] {
 <p>discrimination loss</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오후_2.31.31.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_2.31.31.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">background와 인스턴스 간의 거리와 서로 다른 인스턴스 간의 거리를 나타낸다. 서로 다른 인스턴스 간의 거리를 계산하기 위해서 <code>torch.repeat</code> 과 <code>torch.eye</code> 를 활용한 것이 주목할만 하다.</figcaption>
 </figure>
 </div>
@@ -327,7 +327,7 @@ ul.task-list li input[type="checkbox"] {
 <p>위 손실함수를 잘 반영해서 학습하면, 꽤 정교한 아웃풋(text region, kernel, instance)을 얻을 수 있다. 더 정교한 결과를 위해서 PAN++는 <strong>inference단계에서는</strong> pixel aggregation 기법을 사용한다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="posts\PAN++\스크린샷_2021-12-27_오후_3.10.40.png" class="img-fluid figure-img"></p>
+<p><img src="스크린샷_2021-12-27_오후_3.10.40.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">스크린샷 2021-12-27 오후 3.10.40.png</figcaption>
 </figure>
 </div>
